@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="card p-4 shadow">
+    <h1>{{ project.title }}</h1>
+
+    <p class="mt-3">{{ project.description }}</p>
+
+    <p><b>Tech:</b> {{ project.tech_stack }}</p>
+
+    <a href="/" class="btn btn-secondary mt-3">Back</a>
+</div>
+
+{% endblock %}
