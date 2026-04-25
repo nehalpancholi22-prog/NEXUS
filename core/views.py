@@ -1,5 +1,9 @@
 from django.shortcuts import render , get_object_or_404
 from .models import Project, Contact
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
 
 def home(request):
     projects = Project.objects.all()
@@ -11,6 +15,8 @@ def project_detail(request, id):
     return render(request, 'core/project_detail.html', {'project': project})
 
 
+
+@login_required
 def contact_view(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -26,3 +32,24 @@ def contact_view(request):
         return render(request, 'core/contact.html', {'success': True})
 
     return render(request, 'core/contact.html')
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'core/login.html', {'error': 'Invalid credentials'})
+
+    return render(request, 'core/login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
