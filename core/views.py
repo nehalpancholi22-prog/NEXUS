@@ -10,6 +10,30 @@ def home(request):
     return render(request, 'core/home.html', {'projects': projects})
 
 
+@login_required
+def add_project(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        tech_stack = request.POST.get('tech_stack')
+        github_link = request.POST.get('github_link')
+        live_demo = request.POST.get('live_demo')
+
+        Project.objects.create(
+            title=title,
+            description=description,
+            tech_stack=tech_stack,
+            github_link=github_link,
+            live_demo=live_demo
+        )
+
+        return redirect('home')
+
+    return render(request, 'core/add_project.html')
+
+
+
+
 def project_detail(request, id):
     project = get_object_or_404(Project, id=id)
     return render(request, 'core/project_detail.html', {'project': project})

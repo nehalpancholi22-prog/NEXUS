@@ -13,6 +13,7 @@
 
     <a href="/" class="text-white me-3">Home</a>
     <a href="/contact/" class="text-white me-3">Contact</a>
+    <a href="/add-project/" class="text-white me-3">Add Project</a>
 
     <div class="ms-auto">
         {% if request.user.is_authenticated %}
@@ -23,6 +24,7 @@
         {% else %}
             <a href="/login/" class="text-white">Login</a>
         {% endif %}
+         
     </div>
 
 </nav>

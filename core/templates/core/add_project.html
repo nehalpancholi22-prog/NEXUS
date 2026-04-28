@@ -1,0 +1,17 @@
+<h2>Add Project</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="title" placeholder="Title"><br><br>
+
+    <textarea name="description" placeholder="Description"></textarea><br><br>
+
+    <input type="text" name="tech_stack" placeholder="Tech Stack"><br><br>
+
+    <input type="url" name="github_link" placeholder="GitHub Link"><br><br>
+
+    <input type="url" name="live_demo" placeholder="Live Demo"><br><br>
+
+    <button type="submit">Add Project</button>
+</form>
