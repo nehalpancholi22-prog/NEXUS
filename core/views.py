@@ -14,7 +14,29 @@ def project_detail(request, id):
     project = get_object_or_404(Project, id=id)
     return render(request, 'core/project_detail.html', {'project': project})
 
+def edit_project(request, id):
+    project = get_object_or_404(Project, id=id)
 
+    if request.method == 'POST':
+        project.title = request.POST.get('title')
+        project.description = request.POST.get('description')
+        project.tech_stack = request.POST.get('tech_stack')
+        project.github_link = request.POST.get('github_link')
+        project.live_demo = request.POST.get('live_demo')
+
+        project.save()
+        return redirect('project_detail', id=project.id)
+
+    return render(request, 'core/edit_project.html', {'project': project})
+
+def delete_project(request, id):
+    project = get_object_or_404(Project, id=id)
+
+    if request.method == 'POST':
+        project.delete()
+        return redirect('home')
+
+    return render(request, 'core/delete_confirm.html', {'project': project})
 
 @login_required
 def contact_view(request):

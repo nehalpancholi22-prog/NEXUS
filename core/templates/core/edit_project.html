@@ -1,0 +1,17 @@
+<h2>Edit Project</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="title" value="{{ project.title }}"><br><br>
+
+    <textarea name="description">{{ project.description }}</textarea><br><br>
+
+    <input type="text" name="tech_stack" value="{{ project.tech_stack }}"><br><br>
+
+    <input type="url" name="github_link" value="{{ project.github_link }}"><br><br>
+
+    <input type="text" name="live_demo" value="{{ project.live_demo }}"><br><br>
+
+    <button type="submit">Update</button>
+</form>
